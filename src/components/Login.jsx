@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
+import { Navigate } from 'react-router-dom'
 import GlassCard from './GlassCard'
 import { useAuth } from './AuthContext'
 
 export default function Login() {
-  const { login } = useAuth()
+  const { login, user } = useAuth()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  if (user) return <Navigate to="/" replace />
 
   const onSubmit = async (e) => {
     e.preventDefault()
